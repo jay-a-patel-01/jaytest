@@ -1,0 +1,19 @@
+.error {
+    color:red;
+    font-size: larger;
+}
+
+ .q-required {
+    color:red;
+}
+
+.forms-container {
+    display: flex;
+    justify-content: space-between; /* to add space between the forms */
+    margin-bottom: 50px;
+    margin-top: 50px;
+  }
+
+  .form {
+    flex: 1; /* to make the forms take up equal space */
+  }

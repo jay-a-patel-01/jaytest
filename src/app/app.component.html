@@ -1,0 +1,221 @@
+
+
+<div class="container form ">
+    <div class="row justify-content-center">
+      <div class="col-md-6">
+        <div class="card">
+          <h1>Reactive form</h1>
+          <div class="card-header">
+            <h3>Add User</h3>
+          </div>
+          <div class="card-body">
+            <form [formGroup]="myForm" (ngSubmit)="onSubmit(myForm.value)">
+              <div class="mb-3">
+                <label for="name" class="form-label">Name<span class="text-danger">*</span></label>
+                <input type="text" class="form-control" id="name" formControlName="name" >
+                <div *ngIf="myForm.get('name')?.invalid && (myForm.get('name')?.dirty || myForm.get('name')?.touched)">
+                  <div class="text-danger" *ngIf="myForm.get('name')?.errors?.['required']">Name is required</div>
+                  <div class="text-danger" *ngIf="myForm.get('name')?.errors?.['minlength']">Name must be at least 3 characters</div>
+                  <div class="text-danger" *ngIf="myForm.get('name')?.errors?.['maxlength']">Name cannot be more than 20 characters</div>
+                </div>
+              </div>
+        
+              <div class="mb-3">
+                <label for="age" class="form-label">Age<span class="text-danger">*</span></label>
+                <input type="number" class="form-control" id="age" formControlName="age">
+                <div *ngIf="myForm.get('age')?.invalid && (myForm.get('age')?.dirty || myForm.get('age')?.touched)">
+                  <div class="text-danger" *ngIf="myForm.get('age')?.errors?.['required']">Age is required</div>
+                  <div class="text-danger" *ngIf="myForm.get('age')?.errors?.['min']">Age must be at least 18</div>
+                  <div class="text-danger" *ngIf="myForm.get('age')?.errors?.['max']">Age cannot be more than 100</div>
+                </div>
+              </div>
+              <div class="mb-3">
+                <label for="phone" class="form-label">Phone<span class="text-danger">*</span></label>
+                <input type="tel" class="form-control" id="phone" formControlName="phone">
+                <div *ngIf="myForm.get('age')?.invalid && (myForm.get('phone')?.dirty || myForm.get('phone')?.touched)">
+                <div class="text-danger" *ngIf="myForm.get('phone')?.errors?.['required']">Phone number is required</div>
+                <div class="text-danger" *ngIf="myForm.get('phone')?.errors?.['pattern']">Phone number should be 10 digits</div>
+              </div>
+              </div>
+              <div class="mb-3 form-check">
+                <input type="checkbox" class="form-check-input" id="newsletter" formControlName="newsletter">
+                <label class="form-check-label" for="newsletter">Subscribe to Newsletter</label>
+              </div>
+              <div class="mb-3">
+                <label class="form-label">Gender<span class="text-danger">*</span></label>
+                <div class="form-check">
+                  <input class="form-check-input" type="radio" name="gender" id="male" value="M" formControlName="gender" >
+                  <label class="form-check-label" for="male">
+                    Male
+                  </label>
+                </div>
+                <div class="form-check">
+                  <input class="form-check-input" type="radio" name="gender" id="female" value="F" formControlName="gender" >
+                  <label class="form-check-label" for="female">
+                    Female
+                  </label>
+                </div>
+                <div class="form-check">
+                  <input class="form-check-input" type="radio" name="gender" id="other" value="O" formControlName="gender" >
+                  <label class="form-check-label" for="other">
+                    Other
+                  </label>
+                </div>
+                <div *ngIf="myForm.get('gender')?.invalid && (myForm.get('gender')?.dirty || myForm.get('gender')?.touched)">
+                <div class="text-danger" *ngIf="myForm.get('gender')?.errors?.['required']">Gender is required</div>
+                </div>
+              </div>
+              <button type="submit" class="btn btn-primary">Submit</button>
+            </form>
+          </div>
+        </div>
+      </div>
+
+      
+      <div class="col-md-6">
+        <div class="card">
+          <div class="card-header">
+            <h1>Template Driven form</h1>
+            <h3>Add User</h3>
+          </div>
+          <div class="card-body">
+            <form #userForm="ngForm"  (ngSubmit)="onSubmit(userForm.value)">
+              <div class="mb-3">
+                <label for="name" class="form-label">Name <span class="text-danger">*</span></label>
+                <input type="text" class="form-control" id="name" name="name" ngModel  ngModel minlength="3" maxlength="20" required>
+                <span class="text-danger" *ngIf="userForm.controls['name'].invalid && (userForm.controls['name'].dirty || userForm.controls['name'].touched)">Name is required</span>
+                
+              </div>
+              <div class="mb-3">
+                <label for="age" class="form-label">Age<span class="text-danger">*</span></label>
+                <input type="number" class="form-control" id="age" name="age" ngModel min="1" max="100" required>
+                <span class="text-danger" *ngIf="userForm.controls['age'].invalid && (userForm.controls['age'].dirty || userForm.controls['age'].touched)">Age is required</span>
+              </div>
+              <div class="mb-3">
+                <label for="phone" class="form-label">Phone <span class="text-danger">*</span></label>
+                <input type="tel" class="form-control" id="phone" name="phone"   ngModel  pattern="[0-9]{10}" required>
+                <span class="text-danger" *ngIf="userForm.controls['phone'].invalid && (userForm.controls['phone'].dirty || userForm.controls['phone'].touched)">Phone is required</span>
+              </div>
+              <div class="mb-3 form-check">
+                <input type="checkbox" class="form-check-input" id="newsletter" name="newsletter" ngModel>
+                <label class="form-check-label" for="newsletter">Subscribe to Newsletter</label>
+              </div>
+              <div class="mb-3">
+                <label class="form-label">Gender <span class="text-danger">*</span></label>
+                <div class="form-check">
+                  <input class="form-check-input" type="radio" name="gender" id="male" value="M" ngModel required>
+                  <label class="form-check-label" for="male">
+                    Male
+                  </label>
+                </div>
+                <div class="form-check">
+                  <input class="form-check-input" type="radio" name="gender" id="female" value="F" ngModel required>
+                  <label class="form-check-label" for="female">
+                    Female
+                  </label>
+                </div>
+                <div class="form-check">
+                  <input class="form-check-input" type="radio" name="gender" id="other" value="O" ngModel required>
+                  <label class="form-check-label" for="other">
+                    Other
+                  </label>
+                </div>
+              </div>
+              <button type="submit" class="btn btn-primary">Submit</button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+</div>
+
+
+
+
+  <div class="card ">
+  <h5 class="card-header mb-3 text-center">User Manager</h5>
+  <div class="card-body">
+    <div class="row">
+      <div class="col-md-12">
+
+        <td><button class="btn  btn-primary mb-3" (click)="onAdd()">Add</button></td>
+        <div *ngIf="Error" class="error">{{ Error }}</div>
+        <table class="table table-hover table-outline mb-0 table-responsive layout " style="background-color: white">
+          <thead class="thead-default" style="background-color: #c2cfd6">
+            <tr>
+              <th class="w-25">Name <span class="q-required">*</span></th>
+              <th class="w-15">Age<span class="q-required">*</span></th>
+              <th class="w-20">Phone<span class="q-required">*</span></th>
+              <th class="w-20">IsNewLatter</th>
+              <th class="w-115">Gender<span class="q-required">*</span></th>
+              <th class="w-25">Action</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let user of users">
+              <td>
+                <div *ngIf="user.isEdit">
+                  <input type="text" [(ngModel)]="user.name" class="form-control " minlength="2" maxlength="30">
+                </div>
+                <div *ngIf="!user.isEdit">
+                  {{user.name}}
+                </div>
+              </td>
+
+              <td>
+                <div *ngIf="user.isEdit">
+                  <input type="number" [(ngModel)]="user.age" class="form-control">
+                </div>
+                <div *ngIf="!user.isEdit">
+                  {{user.age}}
+                </div>
+              </td>
+
+              <td>
+                <div *ngIf="user.isEdit">
+                  <input type="number" [(ngModel)]="user.phone" required class="form-control ">
+                </div>
+                <div *ngIf="!user.isEdit">
+                  {{user.phone}}
+                </div>
+              </td>
+
+              <td>
+                <div *ngIf="user.isEdit">
+                  <input type="checkbox" [(ngModel)]="user.newsletter" class="form-check-input">
+                </div>
+                <div *ngIf="!user.isEdit">
+                  <input type="checkbox" [(ngModel)]="user.newsletter" class="form-check-input" disabled>
+                </div>
+              </td>
+
+              <td>
+                <div *ngIf="user.isEdit">
+                  <select name="gender" [(ngModel)]="user.gender">
+                    <option *ngFor="let gender of genders" value="{{ gender.id }}">
+                      {{ gender.name }}
+                    </option>
+                  </select>
+                </div>
+                <div *ngIf="!user.isEdit">
+                  {{user.gender}}
+                </div>
+              </td>
+
+              <div *ngIf="!user.isEdit">
+                <td><button class="btn  btn-primary" (click)="onEdit(user)">Edit</button></td>
+                <td><button class="btn  btn-danger" (click)="onDelete(user)">Delete</button></td>
+              </div>
+
+              <div *ngIf="user.isEdit">
+                <td><button class="btn  btn-primary" (click)="onSave(user)">Save</button></td>
+                <td><button class="btn  btn-danger" (click)="onCancel(user)">Cancel</button></td>
+              </div>
+
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>

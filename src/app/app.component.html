@@ -11,8 +11,7 @@
           <div class="card-body">
             <form [formGroup]="myForm" (ngSubmit)="onSubmit(myForm.value)">
               <div class="mb-3">
-                <label for="name" class="form-label">Name8<span class="text-danger">*</span></label>
-
+                <label for="name" class="form-label">Name<span class="text-danger">*</span></label>
                 <input type="text" class="form-control" id="name" formControlName="name" >
                 <div *ngIf="myForm.get('name')?.invalid && (myForm.get('name')?.dirty || myForm.get('name')?.touched)">
                   <div class="text-danger" *ngIf="myForm.get('name')?.errors?.['required']">Name is required</div>
